@@ -72,7 +72,6 @@ function computerPlay(){
 let result = "";
 
 function playRound(playerSelection, computerSelection){
-    playerSelection = playerSelection.toLowerCase();
     if( playerSelection == computerSelection ){
         result = "It's a draw";
     } else if ( playerSelection == "paper" && computerSelection == "rock" || playerSelection == "scissor" && computerSelection == "paper" || playerSelection == "rock" && computerSelection == "scissor"){
@@ -87,10 +86,23 @@ function game(){
     let userScore = 0;
     let computerScore = 0;
     let draw = 0;
+    alert("Let's play Rock, Paper & Scissor")
     for (let r = 0; r < 5 ; r++) {
         let count = r + 1;
         let computerSelection = computerPlay()
-        let playerSelection = prompt("What is your selection: ")
+        let playerSelection = prompt("Choose Rock, Paper or Scissor: ")
+
+        if(playerSelection === null){
+            alert("You exited the game")
+            break;
+        }else{
+            playerSelection = playerSelection.toLowerCase()
+        }
+
+        if(playerSelection !== "rock" && playerSelection !== "paper" && playerSelection !== "scissor"){
+            r = r - 1
+            alert("You choice should be between Rock Paper & Scissor")
+        }
         
         playRound(playerSelection, computerSelection)
         
