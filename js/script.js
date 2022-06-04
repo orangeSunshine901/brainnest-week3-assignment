@@ -65,7 +65,7 @@ function computerPlay(){
         case 2:
             return ("paper");
         case 3:
-            return ("scissors");
+            return ("scissor");
     }
 }
 
@@ -75,7 +75,7 @@ function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     if( playerSelection == computerSelection ){
         result = "It's a draw";
-    } else if ( playerSelection == "paper" && computerSelection == "rock" || playerSelection == "scissors" && computerSelection == "paper"){
+    } else if ( playerSelection == "paper" && computerSelection == "rock" || playerSelection == "scissor" && computerSelection == "paper"){
         result = "You win";
     } else {
         result = "You lose";
