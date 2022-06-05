@@ -57,6 +57,7 @@
 
 // Main Assignment
 
+// This is the computer play function, the computer randomly returns a value between rock, paper & scissor
 function computerPlay(){
     let randomNumber = Math.ceil(Math.random() * 3)
     switch(randomNumber) {
@@ -69,19 +70,26 @@ function computerPlay(){
     }
 }
 
+// Global variable for displaying the result of the game
 let result = "";
 
+
+// This function plays a single round and compares the user input with the computer input and determines the result
 function playRound(playerSelection, computerSelection){
     if( playerSelection == computerSelection ){
         result = "It's a draw";
     } else if ( playerSelection == "paper" && computerSelection == "rock" || playerSelection == "scissor" && computerSelection == "paper" || playerSelection == "rock" && computerSelection == "scissor"){
         result = "You win";
+        // Added this statement to check user input and reassign a value to the result global variable
+    } else if (playerSelection !== "rock" && playerSelection !== "paper" && playerSelection !== "scissor"){
+        result = "Wrong input"
     } else {
         result = "You lose";
     }
     return (`Your Selection: ${playerSelection}, Computers Selection: ${computerSelection}, Result: ${result}`)
 }
 
+// This is the main game function which keeps the user score, computer score, draw score, rounds, if user decided to cancel the game, Displays an alert & a console message if the user inputs the wrong value
 function game(){
     let userScore = 0;
     let computerScore = 0;
@@ -95,13 +103,13 @@ function game(){
         if(playerSelection === null){
             alert("You exited the game")
             break;
-        }else{
+        } else{
             playerSelection = playerSelection.toLowerCase()
         }
 
-        if(playerSelection !== "rock" && playerSelection !== "paper" && playerSelection !== "scissor"){
+        if( playerSelection !== "rock" && playerSelection !== "paper" && playerSelection !== "scissor" ){
             r = r - 1
-            alert("You choice should be between Rock Paper & Scissor")
+            alert("Wrong Input! Choose between Rock Paper & Scissor");
         }
         
         playRound(playerSelection, computerSelection)
@@ -116,10 +124,14 @@ function game(){
             console.log (
                 `${playRound(playerSelection, computerSelection)},\nYour Score: ${userScore},\nComputer Score: ${computerScore},\nDraw: ${draw},\nRound: ${count}`
             );
-        } else{
+        } else if (result == "It's a draw"){
             draw += 1;
             console.log(
                 `${playRound(playerSelection, computerSelection)},\nYour Score: ${userScore},\nComputer Score: ${computerScore},\nDraw: ${draw},\nRound: ${count}`
+            );
+        } else {
+            console.log(
+                "Wrong user input!"
             );
         }
     }
